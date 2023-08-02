@@ -28,5 +28,5 @@ class UserAdmin(BaseUserAdmin):
     )
 
 
+admin.site.register(User, UserAdmin)
 admin.site.register(Video)
-admin.site.register(User)
