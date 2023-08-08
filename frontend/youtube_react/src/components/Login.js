@@ -64,18 +64,21 @@ const initialState = {
 
 const loginReducer = (state, action) => {
   switch (action.type) {
+    // バックエンドのAPIへのフェッチを開始したときに呼び出される
     case START_FETCH: {
       return {
         ...state,
         isLoading: true,
       };
     }
+    // バックエンドのAPIへのフェッチが成功
     case FETCH_SUCCESS: {
       return {
         ...state,
         isLoading: false,
       };
     }
+    // エラー
     case ERROR_CATCHED: {
       return {
         ...state,
@@ -83,10 +86,10 @@ const loginReducer = (state, action) => {
         isLoading: false,
       };
     }
+    // input(email, password)が変更したときに呼び出される
     case INPUT_EDIT: {
       return {
         ...state,
-        //[action.inputName]: action.payload,
         credentialsLog: {
           ...state.credentialsLog,
           [action.inputName]: action.payload,
@@ -94,12 +97,14 @@ const loginReducer = (state, action) => {
         error: "",
       };
     }
+    // ログインと新規作成の切り替え
     case TOGGLE_MODE: {
       return {
         ...state,
         isLoginView: !state.isLoginView,
       };
     }
+    // どれにも一致しないアクション時は今のstateを返す
     default:
       return state;
   }
@@ -110,12 +115,8 @@ const Login = (props) => {
   const [state, dispatch] = useReducer(loginReducer, initialState);
 
   const inputChangedLog = () => (event) => {
-    //const cred = state.credentialsLog;
-    //cred[event.target.name] = event.target.value;
     dispatch({
       type: INPUT_EDIT,
-      // inputName: "state.credentialLog",
-      //payload: cred,
       inputName: event.target.name,
       payload: event.target.value,
     });
