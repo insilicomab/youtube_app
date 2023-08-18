@@ -118,7 +118,7 @@ const Main = () => {
           <input
             type="file"
             id="imageInput"
-            hidden="hidden"
+            hidden="hidden" // 非表示
             onChange={(event) => setThum(event.target.files[0])}
           />
 
